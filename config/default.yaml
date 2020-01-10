@@ -1,6 +1,6 @@
 # credentials on https://my.gigaset-elements.com
-email:    'me@mail.org'
-password: '****'
+email:    'aendu@besonet.ch'
+password: 'Spooky@11g'
 
 # port gigaset-server is running on
 port: 8094
@@ -20,6 +20,9 @@ off_event_delay_after_smoke_detector_test: 300
 
 # allow the propagation of unknown events
 allow_unknown_events: false
+
+# camera id (found with /api/v1/me/basestations)
+basestation_id: 'xxxx'
 
 # camera id (found with /api/v1/me/cameras)
 camera_id: 'xxxx'

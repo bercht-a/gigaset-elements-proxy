@@ -79,6 +79,34 @@ app.get('/intrusion_settings', (_, res) => {
     })
 })
 
+// set the route: intrusion setting active mode (home, away...)
+app.put('/intrusion_settings', (req,res) => {
+    //Get the current intrusion settings
+    gigasetRequest.get(GIGASET_URL.MODE.replace('{id}', conf('basestation_id')),(error, response, body) => {
+        if(response.statusCode == 200){
+
+            //adjust mode
+            var data = JSON.parse(body);
+            data['intrusion_settings']['active_mode'] =  req.query.mode;
+
+            //put new mode to api
+            gigasetRequest.put(GIGASET_URL.MODE.replace('{id}', conf('basestation_id')), { json: data },(error, response, body) => {
+                if(response.statusCode == 200){
+                    res.send('done')
+                  }
+                  else{
+                    handleGigasetError('intrusion settings',  body['error'], body)
+                    res.status(503).end()
+                  }
+            })
+          }
+          else{
+            handleGigasetError('intrusion settings', body['error'], body)
+            res.status(503).end()
+          }  
+    })  
+})
+
 // set the route: returns the readme.md as default page
 app.get('*', (_, res) => {
     fs.readFile('README.md', 'utf8', (_, data) => {
