@@ -87,7 +87,7 @@ app.put('/intrusion_settings', (req,res) => {
 
             //adjust mode
             var data = JSON.parse(body);
-            data['intrusion_settings']['requestedMode'] =  req.query.mode;
+            //data['intrusion_settings']['requestedMode'] =  req.query.mode;
             data['intrusion_settings']['active_mode'] =  req.query.mode;
 
             //put new mode to api
